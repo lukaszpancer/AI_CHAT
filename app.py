@@ -11,7 +11,7 @@ if "chat" not in st.session_state:
 
 @st.cache_resource()
 def get_chatbot():
-    return pipeline(model="facebook/blenderbot_small-90M")
+    return pipeline(model="unsloth/tinyllama-bnb-4bit")
 
 
 chat = st.session_state.chat
@@ -30,6 +30,9 @@ if usr_msg:
         chat.add_message(dict(content=usr_msg, role="user"))
     with st.chat_message("bot"):
         with st.spinner("Typing..."):
+            print(chat)
+            print(type(chat[0]))
+            print(chat[0])
             conversation = chatbot(chat)
             response = conversation.messages[-1]["content"]
         st.markdown(response)
