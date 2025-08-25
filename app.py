@@ -12,11 +12,9 @@ if "chat" not in st.session_state:
 @st.cache_resource()
 def get_chatbot():
     model = AutoModel.from_pretrained(
-        model="unsloth/tinyllama-chat-bnb-4bit", ignore_mismatched_sizes=True
+        "unsloth/tinyllama-chat-bnb-4bit", ignore_mismatched_sizes=True
     )
-    return pipeline(
-        model=model,
-    )
+    return pipeline(model=model)
 
 
 chat = st.session_state.chat
