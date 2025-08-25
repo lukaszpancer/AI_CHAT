@@ -1,5 +1,5 @@
 import streamlit as st
-from transformers import pipeline, Conversation
+from transformers import pipeline, Conversation, AutoModel
 
 
 st.markdown("# Hi! I'm a chatbot")
@@ -11,8 +11,11 @@ if "chat" not in st.session_state:
 
 @st.cache_resource()
 def get_chatbot():
+    model = AutoModel.from_pretrained(
+        model="unsloth/tinyllama-chat-bnb-4bit", ignore_mismatched_sizes=True
+    )
     return pipeline(
-        model="unsloth/tinyllama-chat-bnb-4bit",
+        model=model,
     )
 
 
