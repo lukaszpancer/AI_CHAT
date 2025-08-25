@@ -12,8 +12,7 @@ if "chat" not in st.session_state:
 @st.cache_resource()
 def get_chatbot():
     return pipeline(
-        model="unsloth/tinyllama-bnb-4bit",
-        revision="fc56510003ea9d49362400b8a362345150802c31",
+        model="unsloth/tinyllama-chat-bnb-4bit",
     )
 
 
