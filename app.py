@@ -14,7 +14,7 @@ def get_chatbot():
     model = AutoModel.from_pretrained(
         "unsloth/tinyllama-chat-bnb-4bit", ignore_mismatched_sizes=True
     )
-    return pipeline(model=model)
+    return pipeline(task="conversational", model=model)
 
 
 chat = st.session_state.chat
