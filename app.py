@@ -1,5 +1,5 @@
 import streamlit as st
-from transformers import pipeline, Conversation, LLamaForCasualLM, AutoTokenizer
+from transformers import pipeline, Conversation, LlamaForCausalLM, LlamaTokenizer
 
 
 st.markdown("# Hi! I'm a chatbot")
@@ -11,10 +11,10 @@ if "chat" not in st.session_state:
 
 @st.cache_resource()
 def get_chatbot():
-    model = LLamaForCasualLM.from_pretrained(
+    model = LlamaForCausalLM.from_pretrained(
         "unsloth/tinyllama-chat-bnb-4bit", ignore_mismatched_sizes=True
     )
-    tokenizer = AutoTokenizer.from_pretrained("unsloth/tinyllama-chat-bnb-4bit")
+    tokenizer = LlamaTokenizer.from_pretrained("unsloth/tinyllama-chat-bnb-4bit")
     return pipeline(task="conversational", model=model, tokenizer=tokenizer)
 
 
