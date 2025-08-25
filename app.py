@@ -1,5 +1,5 @@
 import streamlit as st
-from transformers import pipeline, Conversation, AutoModel
+from transformers import pipeline, Conversation, AutoModel, AutoTokenizer
 
 
 st.markdown("# Hi! I'm a chatbot")
@@ -14,7 +14,8 @@ def get_chatbot():
     model = AutoModel.from_pretrained(
         "unsloth/tinyllama-chat-bnb-4bit", ignore_mismatched_sizes=True
     )
-    return pipeline(task="conversational", model=model)
+    tokenizer = AutoTokenizer.from_pretrained("unsloth/tinyllama-chat-bnb-4bit")
+    return pipeline(task="conversational", model=model, tokenizer=tokenizer)
 
 
 chat = st.session_state.chat
