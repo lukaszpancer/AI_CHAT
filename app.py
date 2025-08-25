@@ -1,17 +1,39 @@
 import streamlit as st
-from transformers import pipeline, Conversation
+from transformers import pipeline
+from transformers.pipelines.base import Pipeline
 
 
 st.markdown("# Hi! I'm a chatbot")
 st.markdown("##### I'm completely free, so don't expect too much from me :)")
+
+
+class Conversation:
+    def __init__(self):
+        self.messages = [{"role": "system", "content": "You are a helpful assistant."}]
+
+    def add_message(self, message: dict):
+        self.messages.append(message)
+
+    def __iter__(self):
+        return iter(self.messages)
+
+    def __getitem__(self, index):
+        return self.messages[index]
+
+    def __len__(self):
+        return len(self.messages)
+
 
 if "chat" not in st.session_state:
     st.session_state.chat = Conversation()
 
 
 @st.cache_resource()
-def get_chatbot():
-    return pipeline(model="unsloth/tinyllama-bnb-4bit")
+def get_chatbot() -> Pipeline:
+    return pipeline(
+        model="unsloth/tinyllama-bnb-4bit",
+        revision="fc56510003ea9d49362400b8a362345150802c31",
+    )
 
 
 chat = st.session_state.chat

@@ -1,4 +1,6 @@
-transformers==4.36.2
+transformers==4.51.3
 streamlit==1.30.0
-torch==2.1.2
-bitsandbytes==0.39.0
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch
+accelerate==0.26.0
+https://github.com/bitsandbytes-foundation/bitsandbytes/releases/download/continuous-release_main/bitsandbytes-1.33.7.preview-py3-none-manylinux_2_24_x86_64.whl
